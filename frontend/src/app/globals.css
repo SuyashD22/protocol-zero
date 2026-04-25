@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #000000;
+  --color-foreground: #FCFCFC;
+  
+  --color-primary: #CCFF00;
+  --color-accent: #FFDE00;
+  --color-danger: #EC3750;
+  
+  --color-muted: #1A1A1A;
+  --color-muted-foreground: #A3A3A3;
+  
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-oswald), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    cursor: url('/cursor-default.svg') 8 5, auto;
+  }
+
+  a, button, [role="button"], input[type="submit"], input[type="button"], input[type="reset"] {
+    cursor: url('/cursor-pointer.svg') 18 9, pointer;
+  }
+
+  ::selection {
+    background-color: var(--color-primary);
+    color: black;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+  }
+
+  /* Custom Low-Opacity Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(204, 255, 0, 0.15); /* Primary color at very low opacity */
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(204, 255, 0, 0.3);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .glass {
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  /* NOTE: no background-color here — set bg via Tailwind classes on elements */
+  .brutalist-container {
+    border-radius: 40px;
+    overflow: hidden;
+  }
+  
+  .terminal-card {
+    background-color: #111111;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+  }
+  
+  .terminal-header {
+    height: 36px;
+    background-color: #0A0A0A;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    gap: 6px;
+  }
+  
+  .terminal-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .terminal-dot-red    { background-color: #FF5F56; }
+  .terminal-dot-yellow { background-color: #FFBD2E; }
+  .terminal-dot-green  { background-color: #27C93F; }
+  
+  .hover-glow:hover {
+    box-shadow: 0 0 24px rgba(204, 255, 0, 0.25);
+    border-color: #CCFF00 !important;
+  }
+}
