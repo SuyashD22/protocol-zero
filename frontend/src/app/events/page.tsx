@@ -115,7 +115,7 @@ export default function Events() {
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
+                transition={{ delay: i * 0.06, duration: 0.35 }}
                 whileHover={{ scale: 1.06, rotate: 0, zIndex: 10 }}
                 style={{ rotate: event.rotate }}
                 className={`relative ${event.color} text-white rounded-[24px] p-8 shadow-2xl cursor-pointer transition-all h-full`}

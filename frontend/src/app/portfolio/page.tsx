@@ -211,80 +211,88 @@ export default function Portfolio() {
           </p>
         </div>
 
-        {/* Tree — straight branch zigzag (Responsive) */}
-        <div className="relative">
+        {/* ── EVENT TREE / TIMELINE (STATIC NEO-BRUTALIST) ─────────── */}
+        <div className="relative mt-16 pb-12">
           {/* Vertical trunk line */}
-          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-[2px] -translate-x-1/2 bg-gradient-to-b from-[#CCFF00] via-[#FFDE00] to-[#EC3750] opacity-30" />
+          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-1 -translate-x-1/2 bg-white" />
 
-          <div className="w-full space-y-10 md:space-y-0">
+          <div className="w-full space-y-16 md:space-y-12 relative z-10">
             {timelineEvents.map((ev, i) => {
               const isLeft = i % 2 === 0;
               return (
-                <motion.div
+                <div
                   key={i}
-                  initial={{ opacity: 0, x: isLeft ? -40 : 40 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: "-60px" }}
-                  transition={{ delay: 0.05 * i, duration: 0.4 }}
-                  className={`relative flex items-center gap-0 md:mb-12 ${isLeft ? "md:flex-row" : "md:flex-row-reverse"} flex-row`}
+                  className={`relative flex items-center gap-0 ${isLeft ? "md:flex-row" : "md:flex-row-reverse"} flex-row`}
                 >
                   
                   {/* Content box */}
-                  <div className={`w-full md:w-[45%] pl-16 pr-4 md:px-0 ${isLeft ? "md:pr-8 md:text-right" : "md:pl-8 md:text-left"}`}>
+                  <div className={`w-full md:w-[45%] pl-16 pr-4 md:px-0 z-10 ${isLeft ? "md:pr-12 md:text-right" : "md:pl-12 md:text-left"}`}>
                     <div
-                      className="terminal-card rounded-xl p-5 md:p-6 inline-block w-full hover-glow transition-all duration-300"
-                      style={{ borderColor: `${ev.color}40` }}
+                      className="relative rounded-none p-6 md:p-8 inline-block w-full bg-[#0a0a0a] border-4 transition-transform hover:-translate-y-1 hover:-translate-x-1 duration-200"
+                      style={{ 
+                        borderColor: ev.color,
+                        boxShadow: `8px 8px 0px 0px ${ev.color}`
+                      }}
                     >
                       <h3
-                        className="text-lg md:text-xl font-black uppercase font-[family-name:var(--font-heading)] mb-2"
+                        className="text-xl md:text-2xl font-black uppercase font-[family-name:var(--font-heading)] mb-3 tracking-wide"
                         style={{ color: ev.color }}
                       >
                         {ev.name}
                       </h3>
-                      <p className="text-neutral-400 text-xs md:text-sm leading-relaxed">{ev.desc}</p>
+                      <p className="text-white text-sm md:text-base leading-relaxed font-bold">
+                        {ev.desc}
+                      </p>
                     </div>
                   </div>
 
                   {/* Center/Left: horizontal branch + numbered circle */}
-                  <div className="absolute left-6 md:static md:w-[10%] flex items-center justify-center z-10 -translate-x-1/2 md:translate-x-0">
-                    {/* Horizontal branch line (hidden on mobile) */}
+                  <div className="absolute left-6 md:static md:w-[10%] flex items-center justify-center z-20 -translate-x-1/2 md:translate-x-0">
+                    {/* Horizontal branch line */}
                     <div
-                      className="hidden md:block absolute h-[2px] w-full opacity-40"
-                      style={{ backgroundColor: ev.color }}
-                    />
-                    {/* Numbered circle */}
-                    <div
-                      className="w-10 h-10 md:w-11 md:h-11 rounded-full flex items-center justify-center font-black text-sm md:text-base z-10 border-2 bg-black"
-                      style={{
-                        borderColor: ev.color,
-                        color: ev.color,
-                        boxShadow: `0 0 16px ${ev.color}50`,
+                      className="hidden md:block absolute h-1 w-[50%] bg-white"
+                      style={{ 
+                        [isLeft ? 'right' : 'left']: '50%'
                       }}
+                    />
+                    
+                    {/* Numbered Node */}
+                    <div
+                      className="relative w-12 h-12 md:w-16 md:h-16 flex items-center justify-center bg-[#0a0a0a] border-4 z-10 hover:-translate-y-1 transition-transform duration-200 cursor-pointer"
+                      style={{ borderColor: ev.color, boxShadow: `4px 4px 0px 0px ${ev.color}` }}
                     >
-                      {ev.num}
+                      <span 
+                        className="font-black text-xl md:text-2xl"
+                        style={{ color: ev.color }}
+                      >
+                        {ev.num}
+                      </span>
                     </div>
                   </div>
 
-                  {/* Empty spacer / Winners (hidden on mobile, visible on desktop) */}
-                  <div className={`hidden md:flex md:w-[45%] flex-col justify-center ${isLeft ? "pl-8 text-left" : "pr-8 text-right"}`}>
+                  {/* Empty spacer / Winners */}
+                  <div className={`hidden md:flex md:w-[45%] flex-col justify-center ${isLeft ? "pl-12 text-left" : "pr-12 text-right"}`}>
                     {ev.winner && (
-                      <div className="opacity-80 transition-opacity hover:opacity-100">
-                        <p className="text-[#FFDE00] font-black uppercase text-sm font-[family-name:var(--font-mono)] tracking-widest mb-1 flex items-center gap-2 justify-start" style={{ justifyContent: isLeft ? "flex-start" : "flex-end" }}>
-                          <Trophy className="w-4 h-4" /> WINNER
+                      <div className="mb-2">
+                        <p className="text-[#CCFF00] font-black uppercase text-sm font-[family-name:var(--font-mono)] tracking-widest mb-2 flex items-center gap-2" style={{ justifyContent: isLeft ? "flex-start" : "flex-end" }}>
+                          <Trophy className="w-5 h-5" /> 
+                          <span className="bg-[#CCFF00] text-black px-2 py-0.5 font-bold uppercase tracking-widest border border-black">WINNER</span>
                         </p>
-                        <p className="text-white font-bold text-lg">{ev.winner}</p>
+                        <p className="text-white font-black text-2xl tracking-tight uppercase">
+                          {ev.winner}
+                        </p>
                       </div>
                     )}
                     {ev.runnerUp && (
-                      <div className="mt-3 opacity-60 hover:opacity-100 transition-opacity">
-                        <p className="text-neutral-400 font-bold uppercase text-xs font-[family-name:var(--font-mono)] tracking-widest mb-1">
+                      <div className="mt-1">
+                        <p className="text-neutral-500 font-black uppercase text-xs font-[family-name:var(--font-mono)] tracking-widest mb-1">
                           Runner Up
                         </p>
-                        <p className="text-neutral-300 text-sm">{ev.runnerUp}</p>
+                        <p className="text-neutral-300 text-base font-bold uppercase">{ev.runnerUp}</p>
                       </div>
                     )}
                   </div>
-                </motion.div>
+                </div>
               );
             })}
           </div>

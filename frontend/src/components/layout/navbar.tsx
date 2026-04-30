@@ -46,6 +46,7 @@ export function Navbar() {
                     "relative font-black text-sm tracking-widest uppercase transition-all font-[family-name:var(--font-mono)]",
                     isActive ? "text-[#CCFF00]" : "text-neutral-400 hover:text-white"
                   )}
+                  style={{ WebkitTextStroke: isActive ? "0.5px #CCFF00" : "0.5px rgba(255,255,255,0.1)" }}
                 >
                   {link.name}
                   {isActive && (
